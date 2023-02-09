@@ -1,0 +1,24 @@
+{
+  "format_version": 1.12,
+  "minecraft:recipe_shapeless": {
+    "description": {
+      "identifier": "yes:phantom1_2"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "ingredients": [
+      {
+        "item": "yes:phantom_whip_ad1"
+      },
+      {
+        "item": "yes:phantom_whip_ad2"
+      }
+    ],
+    "result": [
+      {
+        "item": "yes:phantom_whip_ad3"
+      }
+    ]
+  }
+}

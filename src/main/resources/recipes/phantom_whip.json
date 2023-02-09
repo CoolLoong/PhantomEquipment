@@ -1,0 +1,27 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "yes:phantom_whip"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      " XX",
+      "Y X",
+      " X "
+    ],
+    "key": {
+      "Y": {
+        "item": "minecraft:stick"
+      },
+      "X": {
+        "item": "yes:phantom_cloth"
+      }
+    },
+    "result": {
+      "item": "yes:phantom_whip"
+    }
+  }
+}

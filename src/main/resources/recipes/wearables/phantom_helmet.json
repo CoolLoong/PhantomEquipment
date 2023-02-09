@@ -1,0 +1,26 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "yes:phantom_helmet"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "YZY",
+      "Y Y"
+    ],
+    "key": {
+      "Z": {
+        "item": "yes:phantom_cloth"
+      },
+      "Y": {
+        "item": "minecraft:phantom_membrane"
+      }
+    },
+    "result": {
+      "item": "yes:phantom_helmet"
+    }
+  }
+}

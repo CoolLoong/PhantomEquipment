@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cn.powernukkitx</groupId>
+    <artifactId>PhantomEquipment</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.github.PowerNukkitX</groupId>
+            <artifactId>PowerNukkitX</artifactId>
+            <version>490277ede0</version>
+            <scope>system</scope>
+            <systemPath>D:/IDEA/project/PowerNukkitX/target/powernukkitx-1.19.60-r1-shaded.jar</systemPath>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <!-- 指定打包的jar包输出路径 -->
+                    <outputDirectory>D:\IDEA\project\PowerNukkitX\target\plugins</outputDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

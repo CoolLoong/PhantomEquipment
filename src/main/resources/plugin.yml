@@ -1,0 +1,8 @@
+name: PhantomEquipment
+main: cn.coolloong.PhantomEquipment
+version: "1.0.0"
+api: [ "1.0.14" ]
+load: POSTWORLD
+author: CoolLoong
+description: "Phantom Equipment Mod! YT: §b§lWeeweeJuice & §b§lCoolLoong"
+prefix: "PhantomEquipment"

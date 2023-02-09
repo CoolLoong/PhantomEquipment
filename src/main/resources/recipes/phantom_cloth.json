@@ -1,0 +1,26 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "yes:phantom_cloth"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "YY",
+      "XX"
+    ],
+    "key": {
+      "Y": {
+        "item": "minecraft:bone"
+      },
+      "X": {
+        "item": "minecraft:phantom_membrane"
+      }
+    },
+    "result": {
+      "item": "yes:phantom_cloth"
+    }
+  }
+}

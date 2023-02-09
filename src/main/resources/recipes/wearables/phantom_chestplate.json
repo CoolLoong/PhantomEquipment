@@ -1,0 +1,27 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "yes:phantom_chestplate"
+    },
+    "tags": [
+      "crafting_table"
+    ],
+    "pattern": [
+      "Y Y",
+      "YZY",
+      "YZY"
+    ],
+    "key": {
+      "Z": {
+        "item": "yes:phantom_cloth"
+      },
+      "Y": {
+        "item": "minecraft:phantom_membrane"
+      }
+    },
+    "result": {
+      "item": "yes:phantom_chestplate"
+    }
+  }
+}
