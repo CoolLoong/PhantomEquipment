@@ -46,7 +46,7 @@ public class RecipeManager112 {
                     InputStream inputStream = mainClass.getClass().getClassLoader().getResourceAsStream(name);
                     assert inputStream != null;
                     var inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
-                    var recipe = parseAddonRecipe(PARSER.fromJson(inputStreamReader, Map.class));
+                    var recipe = parseRecipe(PARSER.fromJson(inputStreamReader, Map.class));
                     if (recipe != null) {
                         serverRecipeManager.registerRecipe(recipe);
                     }
@@ -58,22 +58,28 @@ public class RecipeManager112 {
         }
     }
 
-    private static Recipe parseAddonRecipe(Map<?, ?> recipeMap) {
-        if (recipeMap.get("format_version").equals("1.12") && recipeMap.containsKey("minecraft:recipe_shaped")) {
-            var shape = (Map<?, ?>) recipeMap.get("minecraft:recipe_shaped");
-            var identifier = (String) ((Map<?, ?>) shape.get("description")).get("identifier");
-            var tags = (String) ((List<?>) shape.get("tags")).get(0);
-            var pattern = ((List<?>) shape.get("pattern")).stream().map(a -> (String) a).toList().toArray(new String[]{});
-            var ingredients = ((Map<?, ?>) shape.get("key")).entrySet().stream().map(e -> {
-                var key = ((String) e.getKey()).toCharArray()[0];
-                var value = (Map<?, ?>) e.getValue();
-                return Map.entry(key, Item.fromString((String) value.get("item")));
-            }).collect(HashMap<Character, Item>::new, (m, e) -> m.put(e.getKey(), e.getValue()), HashMap::putAll);
-            var output = Item.fromString((String) ((Map<?, ?>) shape.get("result")).get("item"));
-            return new ShapedRecipe(identifier, 1, output, pattern, ingredients, List.of());
+    private static Recipe parseRecipe(Map<?, ?> recipeMap) {
+        if (recipeMap.get("format_version").equals("1.12")) {
+            if (recipeMap.containsKey("minecraft:recipe_shaped")) {
+                return parseShapeRecipe(recipeMap);
+            } else return null;//todo more recipe
         } else {
             PhantomEquipment.log.error("Recipe file must be in version 1.12 format!");
             return null;
         }
+    }
+
+    private static Recipe parseShapeRecipe(Map<?, ?> recipeMap) {
+        var shape = (Map<?, ?>) recipeMap.get("minecraft:recipe_shaped");
+        var identifier = (String) ((Map<?, ?>) shape.get("description")).get("identifier");
+        var tags = (String) ((List<?>) shape.get("tags")).get(0);
+        var pattern = ((List<?>) shape.get("pattern")).stream().map(a -> (String) a).toList().toArray(new String[]{});
+        var ingredients = ((Map<?, ?>) shape.get("key")).entrySet().stream().map(e -> {
+            var key = ((String) e.getKey()).toCharArray()[0];
+            var value = (Map<?, ?>) e.getValue();
+            return Map.entry(key, Item.fromString((String) value.get("item")));
+        }).collect(HashMap<Character, Item>::new, (m, e) -> m.put((Character) e.getKey(), e.getValue()), HashMap::putAll);
+        var output = Item.fromString((String) ((Map<?, ?>) shape.get("result")).get("item"));
+        return new ShapedRecipe(identifier, 1, output, pattern, ingredients, List.of());
     }
 }

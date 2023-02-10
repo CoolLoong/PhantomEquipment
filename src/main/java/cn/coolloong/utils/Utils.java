@@ -7,6 +7,7 @@ import cn.nukkit.level.Level;
 import cn.nukkit.plugin.InternalPlugin;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 public final class Utils {
     public static void slientRunCommand(boolean isAsync, CommandSender sender, String... cmds) {
@@ -37,10 +38,10 @@ public final class Utils {
         }
     }
 
-    public static boolean isSeriesArmor(Player player, String[] series) {
-        return player.getInventory().getHelmet().getNamespaceId().equals(series[0])
-                && player.getInventory().getChestplate().getNamespaceId().equals(series[1])
-                && player.getInventory().getLeggings().getNamespaceId().equals(series[2])
-                && player.getInventory().getBoots().getNamespaceId().equals(series[3]);
+    public static boolean isSeriesArmor(Player player, Set<String> series) {
+        return series.contains(player.getInventory().getHelmet().getNamespaceId())
+                && series.contains(player.getInventory().getChestplate().getNamespaceId())
+                && series.contains(player.getInventory().getLeggings().getNamespaceId())
+                && series.contains(player.getInventory().getBoots().getNamespaceId());
     }
 }

@@ -5,6 +5,7 @@ import cn.coolloong.Item.armor.Boots;
 import cn.coolloong.Item.armor.Chestplate;
 import cn.coolloong.Item.armor.Helmet;
 import cn.coolloong.Item.armor.Leggings;
+import cn.coolloong.utils.RecipeManager112;
 import cn.coolloong.utils.Utils;
 import cn.nukkit.item.Item;
 import cn.nukkit.plugin.PluginBase;
@@ -35,13 +36,13 @@ public class PhantomEquipment extends PluginBase {
                         Pickaxe.class, Shovel.class, Sword.class,
                         Boots.class, Chestplate.class, Helmet.class,
                         Leggings.class, PhantomCloth.class
-                )
+                )//TODO 完成附魔书
         ).assertOK();
     }
 
     @Override
     public void onEnable() {
-//        RecipeManager112.registerRecipeToServer(this, "recipes/");
+        RecipeManager112.registerRecipeToServer(this, "recipes/");
         this.getServer().getPluginManager().registerEvents(new MyEventHandler(), this);
         this.getServer().getScoreboardManager().addScoreboard(whipAnimation);
         this.getServer().getScoreboardManager().addScoreboard(phantomInvis);
