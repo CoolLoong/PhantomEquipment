@@ -6,7 +6,7 @@ Make sure to turn on `enable-experiment-mode=on` in `server.properties`.
 
 ### Usage:
 
-1. Download the ResourcePack from https://mcpedl.com/1-17-amethyst-equipment-armor-tools/ ,Only need to download the ResourcePack no BehaviorPack.
+1. Download the ResourcePack from https://mcpedl.com/phantom-armor-tools-and-whip-addon/ ,Only need to download the ResourcePack no BehaviorPack.
 
 2. Use the PNX core vertion,Download from https://github.com/PowerNukkitX/PowerNukkitX/actions/runs/4144550996
 
