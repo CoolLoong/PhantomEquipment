@@ -37,4 +37,5 @@ jobs:
         automatic_release_tag: "1.0.0"
         prerelease: false
         title: "PhantomEquipment v1.0.0"
-        files: *.jar
+        files: |
+            *.jar
