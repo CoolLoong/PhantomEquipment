@@ -31,11 +31,10 @@ jobs:
       run: mvn -B package --file pom.xml
 
     - name: Release
-        uses: "marvinpinto/action-automatic-releases@latest"
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "1.0.0"
-          prerelease: false
-          title: "PhantomEquipment v1.0.0"
-          files: |
-            *.jar
+      uses: "marvinpinto/action-automatic-releases@latest"
+      with:
+        repo_token: "${{ secrets.GITHUB_TOKEN }}"
+        automatic_release_tag: "1.0.0"
+        prerelease: false
+        title: "PhantomEquipment v1.0.0"
+        files: *.jar
