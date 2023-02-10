@@ -24,6 +24,9 @@ public class MyEventHandler implements Listener {
         Server.getInstance().getScheduler().scheduleRepeatingTask(PhantomEquipment.instance, () -> {
             for (var p : Server.getInstance().getOnlinePlayers().values()) {
                 if (Utils.isSeriesArmor(p, ARMOR_SERIES)) {
+                    if (p.isSneaking() && !p.onGround && !p.isCreative()) {
+                        p.addEffect(Effect.getEffect(Effect.SLOW_FALLING).setVisible(false).setDuration(20).setAmplifier(0));
+                    }
                     PlayerScorer playerScorer = new PlayerScorer(p);
                     playerInvisibleValue.putIfAbsent(p, 0);
                     int value = playerInvisibleValue.get(p);
@@ -35,7 +38,7 @@ public class MyEventHandler implements Listener {
                         }
                         if (value == 51) {
                             PhantomEquipment.phantomInvis.addLine(playerScorer, 51);
-                            Utils.slientRunCommand(false, p, "scoreboard objectives setdisplay belowname phantom_invis", "particle yes:phantom_particle ~~1~", "particle yes:phantom_landing_cloud ~~1~");
+                            Utils.slientRunCommand(false, p, "particle yes:phantom_particle ~~1~", "particle yes:phantom_landing_cloud ~~1~");
                         }
                     } else if (p.isSprinting()) {
                         p.addEffect(Effect.getEffect(Effect.INVISIBILITY).setVisible(false).setDuration(50).setAmplifier(0));
@@ -43,6 +46,7 @@ public class MyEventHandler implements Listener {
                             playerInvisibleValue.put(p, value - 2);
                         } else {
                             playerInvisibleValue.put(p, 0);
+                            PhantomEquipment.phantomInvis.addLine(playerScorer, 0);
                             PhantomEquipment.phantomInvis.removeLine(playerScorer);
                             p.removeEffect(Effect.INVISIBILITY);
                         }
@@ -86,7 +90,12 @@ public class MyEventHandler implements Listener {
                     && !ARMOR_SERIES.contains(newItem.getNamespaceId())
                     && Utils.isSeriesArmor(player, ARMOR_SERIES)) {
                 PhantomEquipment.phantomInvis.removeLine(new PlayerScorer(player));
-                player.removeEffect(Effect.INVISIBILITY);
+                if (player.getEffect(Effect.INVISIBILITY) != null) {
+                    player.removeEffect(Effect.INVISIBILITY);
+                }
+                if (player.getEffect(Effect.SLOW_FALLING) != null) {
+                    player.removeEffect(Effect.SLOW_FALLING);
+                }
             }
         }
     }

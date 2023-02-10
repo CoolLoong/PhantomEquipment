@@ -118,7 +118,9 @@ public class PhantomWhip extends ItemCustomTool {
             PhantomEquipment.instance.getServer().getScheduler().scheduleDelayedTask(PhantomEquipment.instance, () -> {
                 player.removeTag("using_whip");
             }, 30);
-            this.setDamage(this.getDamage() - 1);
+            if (!player.isCreative()) {
+                this.meta += 1;
+            }
             return true;
         } else return false;
     }
@@ -126,6 +128,12 @@ public class PhantomWhip extends ItemCustomTool {
     private void animationTimeline(Player player) {
         PhantomEquipment.timer.schedule(new ScoreAnimationTimeTask(player, 2), 220);
         PhantomEquipment.timer.schedule(new ScoreAnimationTimeTask(player, 3), 300);
+        PhantomEquipment.timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Utils.slientRunCommand(true, player, "playsound weapon.whip_weewee @a[r=20] ~~1~ 1 0.85 0.5");
+            }
+        }, 350);
         PhantomEquipment.timer.schedule(new ScoreAnimationTimeTask(player, 4), 380);
         PhantomEquipment.timer.schedule(new ScoreAnimationTimeTask(player, 5), 460);
         PhantomEquipment.timer.schedule(new ScoreAnimationTimeTask(player, 6), 540);
@@ -140,9 +148,7 @@ public class PhantomWhip extends ItemCustomTool {
                         "particle minecraft:basic_crit_particle ^^1.8^2"
                         , "particle minecraft:basic_crit_particle ^^1.8^2"
                         , "particle minecraft:basic_crit_particle ^^1.8^4"
-                        , "particle minecraft:basic_crit_particle ^^1.8^5"
-                        , "playsound weapon.whip_hit_weewee @a[r=20] ^^1.8^5 1 1 0.5");
-
+                        , "particle minecraft:basic_crit_particle ^^1.8^5");
                 var tmp = getVector3AroundChunkEntity(player.getLevel(), player.asBlockVector3());
                 tmp.remove(player);
                 var entities = tmp.stream().filter(e -> e.isAlive() && e instanceof EntityLiving).toList();
@@ -182,13 +188,14 @@ public class PhantomWhip extends ItemCustomTool {
                         if (areaAABB.getMaxY() >= entityAABB.getMinY() && areaAABB.getMinY() <= entityAABB.getMaxY() &&
                                 areaAABB.getMaxX() >= entityAABB.getMinX() && areaAABB.getMinX() <= entityAABB.getMaxX()) {
                             if (areaAABB.getMaxZ() >= entityAABB.getMinZ() && areaAABB.getMinZ() <= entityAABB.getMaxZ()) {
+                                if (e instanceof Player player1 && player1.isCreative()) break end;
                                 e.attack(7);
                                 e.setMotion(player.getDirectionVector());
+                                Utils.slientRunCommand(true, player, "playsound weapon.whip_hit_weewee @a[r=20] ^^1.8^5 1 1 0.5");
                                 break end;
                             }
                         }
                     }
-
                     start = end;
                 }
             }
