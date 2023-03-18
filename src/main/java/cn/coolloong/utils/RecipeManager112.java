@@ -24,19 +24,8 @@ public class RecipeManager112 {
     private static final Gson PARSER = new Gson();
 
     public static void registerRecipeToServer(PluginBase mainClass, String recipe_path) {
-        URL url = mainClass.getClass().getClassLoader().getResource(recipe_path);
-        if (url == null) {
-            PhantomEquipment.log.error("Plugin jar resource file error, please re-download!");
-            return;
-        }
-        String urlStr = url.toString();
-        // 找到插件jar URL
-        String jarPath = urlStr.substring(0, urlStr.indexOf("!/") + 2);
-        try {
+        try (var jarFile = new JarFile(mainClass.getFile())) {
             var serverRecipeManager = mainClass.getServer().getCraftingManager();
-            var jarURL = new URL(jarPath);
-            JarURLConnection jarCon = (JarURLConnection) jarURL.openConnection();
-            JarFile jarFile = jarCon.getJarFile();
             Enumeration<JarEntry> jarEntrys = jarFile.entries();
             while (jarEntrys.hasMoreElements()) {
                 JarEntry entry = jarEntrys.nextElement();
